@@ -19,7 +19,7 @@ RUN cd ~/Lemay-AIDemo/; git pull
 WORKDIR /Lemay-AIDemo/inference
 
 # upgrade and install the requirements
-RUN pip3 install -Ur ~/Lemay-AIDemo/inference/requirements.txt
+RUN pip3 install -Ur inference/requirements.txt
 
 # The rest of the operation is to start running the server for inference
 RUN cd inference
