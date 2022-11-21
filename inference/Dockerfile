@@ -15,7 +15,7 @@ RUN apt-get update && apt-get install -y \
 
 # I prefer having the model and code downloaded in the docker if the model and the code version is not changing
 # but to be able to use CD we should pull the code everytime and download the model
-RUN cd ~/Lemay-AIDemo/; git pull
+RUN git clone https://github.com/Anshul22Verma/Lemay-AIDemo.git
 WORKDIR /Lemay-AIDemo/inference
 
 # upgrade and install the requirements
