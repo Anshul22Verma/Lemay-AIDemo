@@ -17,12 +17,9 @@ RUN apt-get update && apt-get install -y \
 # but to be able to use CD we should pull the code everytime and download the model
 RUN cd ~/Lemay-AIDemo/; git pull
 WORKDIR /Lemay-AIDemo/inference
-# Create a venv
-RUN python -m venv /opt/venv
-# Enable venv
-ENV PATH="/opt/venv/bin:$PATH"
+
 # upgrade and install the requirements
-RUN pip install -Ur ./Lemay-AIDemo/inference/requirements.txt
+RUN pip3 install -Ur ~/Lemay-AIDemo/inference/requirements.txt
 
 # The rest of the operation is to start running the server for inference
 RUN cd inference
