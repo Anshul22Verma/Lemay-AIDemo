@@ -1,4 +1,3 @@
-from datetime import datetime as dt
 from fastapi import Request,FastAPI
 from pydantic import BaseModel
 import uvicorn
@@ -25,9 +24,8 @@ class SummaryRequest(BaseModel):
 
 
 def get_answer_for_context(request: dict, question_answerer: pipeline):
-    start_time = dt.now()
     result = question_answerer(question=request['question'], context=request['context'])
-    return {'question': request['question'], 'answer': result, 'prediction_time': f'{(dt.now() - start_time).seconds} seconds'}
+    return {'question': request['question'], 'answer': result}
 
 
 @app.get('/')
