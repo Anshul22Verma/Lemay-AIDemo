@@ -7,8 +7,6 @@ from transformers.pipelines import pipeline
 from transformers import AutoTokenizer, AutoModelForSeq2SeqLM
 import torch
 
-from utils import download_artifacts
-
 app = FastAPI()
 
 # use GPU if available
@@ -17,7 +15,9 @@ print ("Device ", torch_device)
 torch.set_grad_enabled(False)
 
 
-tokenizer, model = download_artifacts()
+huggingface_model = "distilbert-base-cased-distilled-squad"
+tokenizer = AutoTokenizer.from_pretrained(huggingface_model)
+model = AutoModelForSeq2SeqLM.from_pretrained(huggingface_model)
 model = model.to(torch_device)
 
 
