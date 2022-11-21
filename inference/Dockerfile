@@ -15,14 +15,13 @@ RUN apt-get update && apt-get install -y \
 
 # I prefer having the model and code downloaded in the docker if the model and the code version is not changing
 # but to be able to use CD we should pull the code everytime and download the model
-RUN git clone https://github.com/Anshul22Verma/Lemay-AIDemo.git
-WORKDIR /Lemay-AIDemo/inference
+WORKDIR /git
+RUN git clone https://github.com/Anshul22Verma/Lemay-AIDemo.git /git/code
+WORKDIR /git/code/inference
 
 # upgrade and install the requirements
-RUN pip3 install -Ur inference/requirements.txt
+RUN pip3 install -Ur requirements.txt
 
-# The rest of the operation is to start running the server for inference
-RUN cd inference
 # Envioronment variables
 ENV LC_ALL=C.UTF-8
 ENV LANG=C.UTF-8
