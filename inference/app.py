@@ -16,9 +16,7 @@ torch.set_grad_enabled(False)
 
 
 huggingface_model = "distilbert-base-cased-distilled-squad"
-tokenizer = DistilBertTokenizer.from_pretrained(huggingface_model)
-model = DistilBertModel.from_pretrained(huggingface_model)
-model = model.to(torch_device)
+question_answerer = pipeline("question-answering", model=huggingface_model)
 
 
 class SummaryRequest(BaseModel):
@@ -26,12 +24,10 @@ class SummaryRequest(BaseModel):
     question: str
 
 
-def get_answer_for_context(request: dict, tokenizer, model):
+def get_answer_for_context(request: dict, question_answerer: pipeline):
     start_time = dt.now()
-    inputs = tokenizer(request['question'], request['context'], return_tensors="pt")
-    with torch.no_grad():
-        outputs = model(**inputs)
-    return {'question': request['question'], 'summary': outputs, 'prediction_time': f'{(dt.now() - start_time).seconds} seconds'}
+    result = question_answerer(question=request['question'], context=request['context'])
+    return {'question': request['question'], 'answer': result, 'prediction_time': f'{(dt.now() - start_time).seconds} seconds'}
 
 
 @app.get('/')
@@ -41,7 +37,7 @@ async def home():
 @app.post("/answer")
 async def getsummary(user_request_in: SummaryRequest):
     payload = {"context": user_request_in.context, "question": user_request_in.question}
-    response = get_answer_for_context(payload,tokenizer,model)
+    response = get_answer_for_context(payload, question_answerer)
     # to ensure the device using which the prediction was made
     response["device"]= torch_device
     return response
