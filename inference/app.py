@@ -4,7 +4,7 @@ from pydantic import BaseModel
 import uvicorn
 
 from transformers.pipelines import pipeline
-from transformers import AutoTokenizer, AutoModelForSeq2SeqLM
+from transformers import DistilBertTokenizer, DistilBertModel
 import torch
 
 app = FastAPI()
@@ -16,8 +16,8 @@ torch.set_grad_enabled(False)
 
 
 huggingface_model = "distilbert-base-cased-distilled-squad"
-tokenizer = AutoTokenizer.from_pretrained(huggingface_model)
-model = AutoModelForSeq2SeqLM.from_pretrained(huggingface_model)
+tokenizer = DistilBertTokenizer.from_pretrained(huggingface_model)
+model = DistilBertModel.from_pretrained(huggingface_model)
 model = model.to(torch_device)
 
 
