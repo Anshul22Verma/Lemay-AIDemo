@@ -17,7 +17,7 @@ print ("Device ", torch_device)
 torch.set_grad_enabled(False)
 
 
-tokenizer, model = download_artifacts
+tokenizer, model = download_artifacts()
 model = model.to(torch_device)
 
 

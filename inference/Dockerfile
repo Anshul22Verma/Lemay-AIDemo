@@ -20,7 +20,7 @@ RUN git clone https://github.com/Anshul22Verma/Lemay-AIDemo.git /git/code
 WORKDIR /git/code/inference
 
 # upgrade and install the requirements
-RUN pip3 install -Ur requirements.txt
+RUN pip3 install --no-cache-dir -Ur requirements.txt
 
 # Envioronment variables
 ENV LC_ALL=C.UTF-8
