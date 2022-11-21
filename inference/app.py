@@ -1,6 +1,7 @@
 from datetime import datetime as dt
 from fastapi import Request,FastAPI
 from pydantic import BaseModel
+import uvicorn
 
 from transformers.pipelines import pipeline
 from transformers import AutoTokenizer, AutoModelForSeq2SeqLM

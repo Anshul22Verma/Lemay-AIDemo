@@ -31,6 +31,6 @@ ENV LANG=C.UTF-8
 EXPOSE 5000
 
 # Start the app, the prediction is being made in GPU and its using an instance with one GPU only
-CMD ["gunicorn", "-b", "0.0.0.0:5000","app:app","--workers","1","-k","uvicorn.workers.UvicornWorker"]
+CMD ["gunicorn", "-b", "0.0.0.0:5000", "app:app", "--workers", "1", "-k", "uvicorn.workers.UvicornWorker"]
 
 # To handle in multiple requests I will attach the  an ALB to the ECS
