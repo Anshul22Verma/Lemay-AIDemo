@@ -26,7 +26,7 @@ The docker is running the app using gunicorn.
 dummy payload in `payload.json`
 
 ### CRUL to make the POST request with the JSON
-```curl -X POST http://54.90.166.57:80/answer -H "Content-Type: application/json" -d @payload.json```
+```curl -X POST http://<publicIP>/answer -H "Content-Type: application/json" -d @payload.json```
 
 ### Sample Notebook
 `inference.ipynb`
